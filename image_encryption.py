@@ -84,7 +84,7 @@ def encrypt(path, password):
     path.unlink()
 
 def decrypt(path, password):
-    output_path = path.with_suffix("")
+    output_path = path.with_stem(path.stem + "_decrypt")
     if output_path.exists():
         print(f"File '{output_path}' already exists. Skipping decryption")
         return
@@ -108,8 +108,11 @@ def decrypt(path, password):
         img.putpixel((pixel % img_size[0],pixel//img_size[0]),
                      ((r - shift +256) % 256, (g - shift + 256)%256,
                      (b - shift + 256 ) % 256))
+
     img.save(output_path, format="PNG")
     path.unlink()
+    final_path = output_path.with_stem(output_path.stem.removesuffix("_decrypt"))
+    output_path.rename(final_path)
 
 if __name__ == "__main__":
     try:
