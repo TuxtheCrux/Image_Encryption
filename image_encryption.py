@@ -6,7 +6,7 @@ import argparse
 import os
 from getpass import getpass
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
-
+#done
 def main():
     parser = argparse.ArgumentParser(
         description="Encrypt or decrypt a image"
